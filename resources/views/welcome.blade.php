@@ -78,9 +78,9 @@
                     @endauth
                 </div>
             @endif
+            <div id="app"></div>
 
             <div class="content">
-                <div id="app"></div>
 
                 <div class="links">
                     <a href="https://laravel.com/docs">Documentation</a>
