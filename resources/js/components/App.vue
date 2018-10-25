@@ -5,7 +5,7 @@
 
     <Navbar title="Simple Navbar"/>
 
-    <Board :board="board"/>
+    <Board/>
     
   </div>
   
@@ -18,10 +18,8 @@ Vue.use(BootstrapVue);
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
-import boards from '../json/boards.json'
-
-import Navbar from './Navbar.vue'
-import Board from './Board.vue'
+import Navbar from '@/components/Navbar.vue'
+import Board from '@/components/Board.vue'
 
 
 
@@ -34,8 +32,7 @@ export default {
   data(){
     return {
       message_text: 'If some variable is false... You will not see this',
-      message: false,
-      board: boards[0]
+      message: false
     }
   },
   methods: {

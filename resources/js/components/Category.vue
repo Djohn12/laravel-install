@@ -11,7 +11,7 @@
                 <div v-if="add_panel" class="list-group list-group-flush">
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                         <div class="input-group-addon">@</div>
-                        <input @keydown.enter="add_link()" type="text" class="form-control form-control-sm" placeholder="Enter you link address"/><i class="fas fa-plus"></i>
+                        <input @keydown.enter="add_link(link_url)" v-model="link_url" type="text" class="form-control" placeholder="Enter you link address"/>
                     </div>
                 </div>
 
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-    import Link from './Link.vue'
+    import Link from '@/components/Link.vue'
 
     export default {
         name: 'Category',
@@ -42,6 +42,7 @@
         data() {
             return {
                 add_panel: false,
+                link_url: ''
             }
         },
         methods: {
@@ -54,6 +55,7 @@
                     name:href,
                     href:href
                 })
+                this.link_url = ''
             },
             del_link(input_id){
                 this.board.links = this.board.links.filter(link => link.id !== input_id)
