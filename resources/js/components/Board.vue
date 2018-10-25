@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import boards from '@/json/boards.json'
+import boards from '../json/boards.json'
 
-import Category from '@/components/Category.vue'
+import Category from './Category.vue'
 
     export default {
         name: 'Board',

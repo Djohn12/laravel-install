@@ -18,8 +18,8 @@ Vue.use(BootstrapVue);
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
-import Navbar from '@/components/Navbar.vue'
-import Board from '@/components/Board.vue'
+import Navbar from './Navbar.vue'
+import Board from './Board.vue'
 
 
 
