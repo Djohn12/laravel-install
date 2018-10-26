@@ -16,14 +16,4 @@ class Favorite extends Model
     protected $fillable = [
         'board_id', 'user_id'
     ];
-
-    public function posts()
-    {
-    	return $this->belongsTo('App\Board');
-    }
-
-    public function users()
-    {
-    	return $this->belongsTo('App\User');
-    }
 }

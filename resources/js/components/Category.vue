@@ -42,7 +42,9 @@
         data() {
             return {
                 add_panel: false,
-                link_url: ''
+                link_url: '',
+                data: null,
+                error: null
             }
         },
         methods: {
@@ -50,13 +52,27 @@
                 return this.board.links.filter(link => ( link.category_id === this.thisCategory.id ))
             },
             add_link(){
-                this.board.links.push({
-                    id: this.board.links[this.board.links.length - 1].id + 1,
-                    category_id: this.thisCategory.id,
-                    name:this.link_url,
-                    href:this.link_url
-                })
-                this.link_url = ''
+                    this.promise('url')
+                    let icon = '';
+                    let title = this.data.title;
+
+                    this.board.links.push({
+                        id: this.board.links[this.board.links.length - 1].id + 1,
+                        category_id: this.thisCategory.id,
+                        name:this.link_url,
+                        href:this.link_url,
+                        icon:icon,
+                        title:title
+                    })
+                    this.link_url = ''
+            },
+            promise(url){
+                fetch(url)
+                    .then(res => res.json())
+                    .then(function(data){
+                        this.data = data.results
+                    })
+                    .catch( e => console.log(e) )
             },
             del_link(link_to_del){
                 this.board.links = this.board.links.filter(link => link.id !== link_to_del.id)
