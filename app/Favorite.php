@@ -17,12 +17,12 @@ class Favorite extends Model
         'board_id', 'user_id'
     ];
 
-    public function posts()
+    public function board()
     {
     	return $this->belongsTo('App\Board');
     }
 
-    public function users()
+    public function user()
     {
     	return $this->belongsTo('App\User');
     }
