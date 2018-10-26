@@ -68,9 +68,16 @@
             },
             promise(url){
                 fetch(url)
-                    .then(res => res.json())
-                    .then(function(data){
-                        this.data = data.results
+                    .then(res => res.text())
+                    .then(html => {
+                        const doc = new DOMParser().parseFromString(html, "text/html");
+                        const title = doc.querySelectorAll('title')[0];
+
+                        this.data ={
+                            doc: doc,
+                            title: title,
+                            icon: ''
+                        }
                     })
                     .catch( e => console.log(e) )
             },
