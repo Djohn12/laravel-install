@@ -68,10 +68,9 @@
                             // ---> Récupère l'id de la dernière entrée du la liste et incrémente de 1
                             id: this.board.links[this.board.links.length - 1].id + 1,
                             category_id: this.thisCategory.id,
-                            name:this.link_url,
+                            name:title,
                             href:this.link_url,
                             icon:icon,
-                            title:title
                         })
                         // Nous effaçons cette variable pour remettre l'input à vide et repartir du bon pied pour une nouvelle entrée
                         this.link_url = ''
