@@ -3,7 +3,7 @@
 
   <div id="app">
 
-    <Navbar title="Simple Navbar"/>
+    <!--<Navbar title="Simple Navbar"/>-->
 
     <Board/>
     
