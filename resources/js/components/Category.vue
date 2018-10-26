@@ -2,7 +2,7 @@
         <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
             <div class="card">
                 <div class="card-header">
-                    <span>#{{ thisCategory.id }} : {{ thisCategory.name }}</span>
+                    <span>{{ thisCategory.name }}</span>
                     <b-btn size="sm" variant="outline-primary" @click="add_panel = !add_panel">
                         <i class="fas fa-plus"></i>
                     </b-btn>

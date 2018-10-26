@@ -65596,14 +65596,7 @@ var render = function() {
         "div",
         { staticClass: "card-header" },
         [
-          _c("span", [
-            _vm._v(
-              "#" +
-                _vm._s(_vm.thisCategory.id) +
-                " : " +
-                _vm._s(_vm.thisCategory.name)
-            )
-          ]),
+          _c("span", [_vm._v(_vm._s(_vm.thisCategory.name))]),
           _vm._v(" "),
           _c(
             "b-btn",
