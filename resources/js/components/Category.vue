@@ -20,7 +20,7 @@
                         <a :href="link.href" target="_blank">{{ link.name }}</a>
                         <button @click="delete_link(link)" class="btn btn-outline-danger btn-sm">x</button>
                     </li> -->
-                    <Link v-for="link in get_links()" :key="link.id" :link="link" @delete_link="del_link(link.id)"/>
+                    <Link v-for="link in get_links()" :key="link.id" :link="link" @delete_link="del_link(link)"/>
                 </ul>
             </div>
         </div>
@@ -51,14 +51,15 @@
             },
             add_link(){
                 this.board.links.push({
+                    id: this.board.links[this.board.links.length - 1].id + 1,
                     category_id: this.thisCategory.id,
                     name:this.link_url,
                     href:this.link_url
                 })
                 this.link_url = ''
             },
-            del_link(input_id){
-                this.board.links = this.board.links.filter(link => link.id !== input_id)
+            del_link(link_to_del){
+                this.board.links = this.board.links.filter(link => link.id !== link_to_del.id)
             }
         }
     }

@@ -65330,7 +65330,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -65401,15 +65401,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         add_link: function add_link() {
             this.board.links.push({
+                id: this.board.links[this.board.links.length - 1].id + 1,
                 category_id: this.thisCategory.id,
                 name: this.link_url,
                 href: this.link_url
             });
             this.link_url = '';
         },
-        del_link: function del_link(input_id) {
+        del_link: function del_link(link_to_del) {
             this.board.links = this.board.links.filter(function (link) {
-                return link.id !== input_id;
+                return link.id !== link_to_del.id;
             });
         }
     }
@@ -65668,7 +65669,7 @@ var render = function() {
             attrs: { link: link },
             on: {
               delete_link: function($event) {
-                _vm.del_link(link.id)
+                _vm.del_link(link)
               }
             }
           })
