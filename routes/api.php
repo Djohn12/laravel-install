@@ -20,7 +20,4 @@ use Illuminate\Http\Request;
 
 Route::post('boards/store', 'BoardController@store');
 
-
-// Route::resource('/boards', 'BoardsController',[
-// 	'except' => ['index', 'create', 'show', 'edit', 'update', 'destroy']
-// ]);
+Route::get('boards/index', 'BoardController@index');
