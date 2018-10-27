@@ -4,7 +4,14 @@
   <div id="app">
 
     <!--<Navbar title="Simple Navbar"/>-->
-
+    <div>
+      <b-btn size="sm" variant="outline-primary" @click="board_panel = !board_panel">New Board</b-btn>
+    </div>
+    <div v-if="board_panel">
+    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+      <input @keydown.enter="add_board()" v-model="board_name" type="text" class="form-control" placeholder="Enter your new board name"/>
+    </div>
+  </div>
     <Board/>
     
   </div>
@@ -31,13 +38,15 @@ export default {
   },
   data(){
     return {
+      board_panel: false,
+      board_name: '',
       message_text: 'If some variable is false... You will not see this',
       message: false
     }
   },
   methods: {
     show(){
-      this.message = !this.message
+      return this.board_pannel = !this.board_panel
     }
   }
 }
