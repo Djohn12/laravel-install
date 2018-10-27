@@ -36,7 +36,7 @@ class BoardController extends Controller
     public function store(Request $request)
     {
         $board = new Board();
-        $board->name = "anyboard";
+        $board->name = $request->name;
         $board->public = 0;
         $board->user_id = 1;
         $board->category_id = 1; // à enlever

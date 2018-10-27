@@ -52,9 +52,9 @@ export default {
       return this.board_panel = !this.board_panel
     },
     add_board() {
-      console.log(name);
+      let name = this.board_name;
       // ajax call to the api route
-      window.axios.post('api/boards/store');
+      window.axios.post('api/boards/store', {name});
     }
   }
 }
