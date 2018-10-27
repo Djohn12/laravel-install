@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Board;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BoardController extends Controller
 {
@@ -38,7 +39,7 @@ class BoardController extends Controller
         $board = new Board();
         $board->name = $request->name;
         $board->public = 0;
-        $board->user_id = 1;
+        $board->user_id = Auth::user()->id;
         $board->category_id = 1; // à enlever
         $board->save();
 
