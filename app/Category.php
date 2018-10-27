@@ -8,7 +8,7 @@ class Category extends Model
 {
 	public function boards()
 	{
-		return his->belongsTo('App\Board');
+		return $this->belongsTo('App\Board');
 	}
 
     public function links()

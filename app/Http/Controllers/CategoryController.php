@@ -12,9 +12,14 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $categories = Category::where('board_id',$request->data['board_id'])->orderBy('id', 'desc');
+
+        return response()->json([
+            'message' => 'Successfully returned the categories of this board',
+            'categories' => $categories
+        ], 201);
     }
 
     /**
