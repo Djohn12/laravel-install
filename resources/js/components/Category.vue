@@ -43,8 +43,6 @@
             return {
                 add_panel: false,
                 link_url: '',
-                data: null,
-                error: null
             }
         },
         methods: {
@@ -52,25 +50,30 @@
                 return this.board.links.filter(link => ( link.category_id === this.thisCategory.id ))
             },
             add_link(){
-                    this.promise('url')
-                    let icon = '';
-                    let title = this.data.title;
+                // La fonction commence par faire un fetch sur l'url entrée
+                fetch(link_url)
+                    // Elle traite ensuite la réponse du serveur distant et la retourne sous forme de html
+                    .then(res => res.text())
+                    // Après ce traitement nous allons éxécuter des actions en utilisant le html.
+                    .then(html => {
+                        // Un coup de parser pour récupérer la balise title.
+                        // ( Je n'ai pas encore trouvé de bonne méthode pour trouver l'icone )
+                        const doc = new DOMParser().parseFromString(html, "text/html");
+                        let icon = '';
+                        const title = doc.querySelectorAll('title')[0];
 
-                    this.board.links.push({
-                        id: this.board.links[this.board.links.length - 1].id + 1,
-                        category_id: this.thisCategory.id,
-                        name:this.link_url,
-                        href:this.link_url,
-                        icon:icon,
-                        title:title
-                    })
-                    this.link_url = ''
-            },
-            promise(url){
-                fetch(url)
-                    .then(res => res.json())
-                    .then(function(data){
-                        this.data = data.results
+                        // On ajoute le lien à l'array contenant les liens
+                        this.board.links.push({
+                            // petit algo pour incrémenter les id à la manière de mysql
+                            // ---> Récupère l'id de la dernière entrée du la liste et incrémente de 1
+                            id: this.board.links[this.board.links.length - 1].id + 1,
+                            category_id: this.thisCategory.id,
+                            name:title,
+                            href:this.link_url,
+                            icon:icon,
+                        })
+                        // Nous effaçons cette variable pour remettre l'input à vide et repartir du bon pied pour une nouvelle entrée
+                        this.link_url = ''
                     })
                     .catch( e => console.log(e) )
             },
