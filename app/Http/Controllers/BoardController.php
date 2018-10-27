@@ -35,7 +35,16 @@ class BoardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $board = new Board();
+        $board->name = "board name";
+        $board->public = 0;
+        $board->user_id = 1;
+        $board->category_id = 1; // à enlever
+        $board->save();
+
+        return response()->json([
+            'message' => 'Successfully created a new board'
+        ], 201);
     }
 
     /**

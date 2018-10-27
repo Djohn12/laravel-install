@@ -5,13 +5,16 @@
 
     <!--<Navbar title="Simple Navbar"/>-->
     <div>
-      <b-btn size="sm" variant="outline-primary" @click="board_panel = !board_panel">New Board</b-btn>
+      <b-button variant="outline-primary" @click="show_board_panel">New Board</b-button>
     </div>
     <div v-if="board_panel">
-    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-      <input @keydown.enter="add_board()" v-model="board_name" type="text" class="form-control" placeholder="Enter your new board name"/>
+      <b-input-group class="col-5 mx-auto">
+        <b-form-input v-model="board_name" type="text" class="form-control" placeholder="Enter your new board name"></b-form-input>
+        <b-input-group-append>
+          <b-button variant="outline-primary" @click="add_board()">Add new board</b-button>
+        </b-input-group-append>
+      </b-input-group>
     </div>
-  </div>
     <Board/>
     
   </div>
@@ -45,8 +48,14 @@ export default {
     }
   },
   methods: {
-    show(){
-      return this.board_pannel = !this.board_panel
+    show_board_panel(){
+      return this.board_panel = !this.board_panel
+    },
+    add_board() {
+      // ajax call to the api route
+      window.axios.post('api/boards/store')
+        .then(() => { this.boards.push(new Board());})
+        .then(console.log(this.board_name));
     }
   }
 }
