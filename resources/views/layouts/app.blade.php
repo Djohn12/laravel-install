@@ -81,8 +81,10 @@
         </main>
     </div>
 
+    @if (Auth::user())
     <script>
         const currentUser = "{{ Auth::user()->id }}";
     </script>
+    @endif
 </body>
 </html>
