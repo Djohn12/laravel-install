@@ -80,5 +80,9 @@
             @yield('content')
         </main>
     </div>
+
+    <script>
+        const currentUser = "{{ Auth::user()->id }}";
+    </script>
 </body>
 </html>
