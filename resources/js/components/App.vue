@@ -55,8 +55,12 @@ export default {
     },
     add_board() {
       let name = this.board_name;
+      let data = {
+        'name': name,
+        'user_id': currentUser 
+      }
       // ajax call to the api route
-      window.axios.post('api/boards/store', {name});
+      window.axios.post('api/boards/store', {data});
     }
   }
 }

@@ -10,6 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    <script src="https://algorithmia.com/v1/clients/js/algorithmia-0.2.0.js" type="text/javascript"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
@@ -79,5 +80,9 @@
             @yield('content')
         </main>
     </div>
+
+    <script>
+        const currentUser = "{{ Auth::user()->id }}";
+    </script>
 </body>
 </html>
