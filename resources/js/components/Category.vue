@@ -10,7 +10,7 @@
                 <!-- Composant permettant le rajout de lien dans la présente catégorie -->
                 <div v-if="add_panel" class="list-group list-group-flush">
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                        <div class="input-group-addon">@</div>
+                        <!--<div class="input-group-addon">@</div>-->
                         <input @keydown.enter="add_link()" v-model="link_url" type="text" class="form-control" placeholder="Enter you link address"/>
                     </div>
                 </div>
@@ -50,32 +50,19 @@
                 return this.board.links.filter(link => ( link.category_id === this.thisCategory.id ))
             },
             add_link(){
-                // La fonction commence par faire un fetch sur l'url entrée
-                fetch(link_url)
-                    // Elle traite ensuite la réponse du serveur distant et la retourne sous forme de html
-                    .then(res => res.text())
-                    // Après ce traitement nous allons éxécuter des actions en utilisant le html.
-                    .then(html => {
-                        // Un coup de parser pour récupérer la balise title.
-                        // ( Je n'ai pas encore trouvé de bonne méthode pour trouver l'icone )
-                        const doc = new DOMParser().parseFromString(html, "text/html");
-                        let icon = '';
-                        const title = doc.querySelectorAll('title')[0];
 
-                        // On ajoute le lien à l'array contenant les liens
-                        this.board.links.push({
-                            // petit algo pour incrémenter les id à la manière de mysql
-                            // ---> Récupère l'id de la dernière entrée du la liste et incrémente de 1
-                            id: this.board.links[this.board.links.length - 1].id + 1,
-                            category_id: this.thisCategory.id,
-                            name:title,
-                            href:this.link_url,
-                            icon:icon,
-                        })
-                        // Nous effaçons cette variable pour remettre l'input à vide et repartir du bon pied pour une nouvelle entrée
-                        this.link_url = ''
-                    })
-                    .catch( e => console.log(e) )
+                this.board.links.push({
+                    // petit algo pour incrémenter les id à la manière de mysql
+                    // ---> Récupère l'id de la dernière entrée du la liste et incrémente de 1
+                    id: this.board.links[this.board.links.length - 1].id + 1,
+                    category_id: this.thisCategory.id,
+                    name:datas,
+                    href:this.link_url,
+                    icon:'',
+                })
+                // Nous effaçons cette variable pour remettre l'input à vide et repartir du bon pied pour une nouvelle entrée
+                this.link_url = ''
+            
             },
             del_link(link_to_del){
                 this.board.links = this.board.links.filter(link => link.id !== link_to_del.id)
