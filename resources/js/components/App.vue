@@ -60,7 +60,8 @@ export default {
         'user_id': currentUser 
       }
       // ajax call to the api route
-      window.axios.post('api/boards/store', {data});
+      window.axios.post('api/boards/store', {data})
+      .then(response => console.log(response.data.new_board));
     }
   }
 }
