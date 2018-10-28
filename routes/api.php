@@ -25,7 +25,3 @@ Route::get('boards/index', 'BoardController@index');
 
 Route::get('categories/get', 'CategoryController@index');
 Route::post('categories/store', 'CategoryController@store');
-
-// Route::resource('/boards', 'BoardsController',[
-// 	'except' => ['index', 'create', 'show', 'edit', 'update', 'destroy']
-// ]);

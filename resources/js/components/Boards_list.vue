@@ -133,16 +133,6 @@
 				this.boards = true;
 				this.boards_list = response.data;
 			});
-
-
-				// fetch('api/boards/index', {
-			// 	method: "GET"
-			// })			
-			// .then(res => res.json())
-			// .then( (json) => {
-			// 	console.log(json);
-			// 	this.boards = true;
-			// })
 		}
 	}
 </script>
