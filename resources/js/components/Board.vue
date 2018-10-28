@@ -66,14 +66,7 @@ import Category from './Category.vue'
                 // ajax call to the api route
                 window.axios.post('api/categories/store', {data})
                 .then(response => {
-                    console.log('response.data')
-                    console.log(response.data)
-
-                    console.log('this.board.categories')
-                    console.log(this.board.categories)
                     this.board.categories = response.data.categories;
-                    console.log('this.board.categories')
-                    console.log(this.board.categories)
                 });
                 // On remet les inputs à zéro
                 this.category_name = ''
