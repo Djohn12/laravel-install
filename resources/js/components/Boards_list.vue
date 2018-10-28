@@ -29,7 +29,7 @@
 			<div v-if="boards">
 				<h2>Available boards :</h2>
 				<b-tabs>
-					<b-tab v-for="board in boards_list" :key="board.id" :title="board.name"></b-tab>
+					<b-tab v-for="board in boards_list" v-bind:key="board.id" :title="board.name"></b-tab>
 				</b-tabs>
 			</div>
 			<!-- else, it means that no boards were retrieved from the database -->
@@ -93,7 +93,7 @@
     			window.axios.post('api/boards/update', {data})
     			.then(response => console.log(response.data.message))
     			.then(() => this.boards_list.map( x => {
-    				if (x.id = id) {
+    				if (x.id == id) {
     					return x.name = new_name;
     				}
     			}));
