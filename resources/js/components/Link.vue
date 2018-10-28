@@ -1,6 +1,6 @@
 <template>
     <li class="list-group-item">
-        <span><a :href="link.href" target="_blank">{{ link.name }}</a></span>
+        <span><a :href="link.url" target="_blank">{{ link.name }}</a></span>
         <!-- <button @click="" class="btn btn-outline-warning btn-sm">
             <i class="far fa-edit"></i>
         </button> -->
