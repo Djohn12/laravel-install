@@ -7,7 +7,7 @@
                         <i class="fas fa-plus"></i>
                     </b-btn>
                     <b-btn size="sm" variant="outline-danger" @click="del_category(thisCategory)">
-                        <i class="fas fa-trash-alt"></i>
+                        <i class="far fa-trash-alt"></i>
                     </b-btn>
                 </div>
                 <!-- Composant permettant le rajout de lien dans la présente catégorie -->
