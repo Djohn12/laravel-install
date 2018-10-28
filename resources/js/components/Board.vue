@@ -46,15 +46,8 @@ import Category from './Category.vue'
         },
         created(){
 
-            window.axios.get('api/categories/get')
-            .then(response => {
-                console.log('response.data')
-                console.log(response.data)
-
-                this.board.categories = response.data.categories;
-                console.log('this.board.categories')
-                console.log(this.board.categories)
-            });
+            window.axios.get(`api/categories/get/${this.board_id}`)
+            .then(response => this.board.categories = response.data.categories );
         },
         methods: {
             show_category_panel(){
@@ -76,6 +69,8 @@ import Category from './Category.vue'
                     console.log('response.data')
                     console.log(response.data)
 
+                    console.log('this.board.categories')
+                    console.log(this.board.categories)
                     this.board.categories = response.data.categories;
                     console.log('this.board.categories')
                     console.log(this.board.categories)

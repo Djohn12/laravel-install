@@ -16,14 +16,14 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $board_id = $request->data['board_id'];
-        $categories = Category::where('board_id', 1)->get();
+        $board_id = 1;
+        $categories = Category::where('board_id', $board_id)->get();
         // $links = [];
         // foreach ($categories as $category) {
         //     array_push($links, )
         // }
         return response()->json([
-            'message' => 'Successfully returned the board categories',
+            'message' => 'Successfully returned the board categories from board : ' . $board_id,
             'categories' => $categories
         ], 201);
     }
@@ -46,13 +46,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $board_id = $request->data['board_id'];
         $category = new Category();
         $category->title = $request->data['title'];
-        $category->board_id = $request->data['board_id'];
+        $category->board_id = $board_id;
         $category->save();
         
-        $categories = Category::where('board_id',$request->data['board_id']);
+        $categories = Category::where('board_id', $board_id)->get();
         // $categories = Category::all();
 
         return response()->json([
