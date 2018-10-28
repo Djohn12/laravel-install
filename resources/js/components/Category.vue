@@ -25,7 +25,7 @@
                         <a :href="link.href" target="_blank">{{ link.name }}</a>
                         <button @click="delete_link(link)" class="btn btn-outline-danger btn-sm">x</button>
                     </li> -->
-                    <Link v-for="link in get_links()" :key="link.id" :link="link" @delete_link="del_link(link)"/>
+                    <Link v-for="link in get_links()" :key="link.id" :link="link" @delete_link="del_link(link.id)"/>
                 </ul>
             </div>
         </div>
@@ -62,7 +62,9 @@
                     'category_id' : this.thisCategory.id
                 }
                 window.axios.post('api/links/store', {link})
-                .then( response => console.log(response.data.message));
+                .then( response => {
+                    this.links = response.data.links
+                });
                 // this.links.push({
                 //     // petit algo pour incrémenter les id à la manière de mysql
                 //     // ---> Récupère l'id de la dernière entrée du la liste et incrémente de 1
@@ -77,8 +79,14 @@
                 this.add_panel = false
             
             },
-            del_link(link_to_del){
-                this.links = this.links.filter(link => link.id !== link_to_del.id)
+            del_link(id){
+
+       			window.axios.post('api/links/destroy', {id})
+                .then( response => {
+                    this.links = this.links.filter(link => link.id !== id)
+                })
+                .catch(e=> console.log(e.response));
+                
             },
             del_category(category){
                 this.$emit('del_category', category)

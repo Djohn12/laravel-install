@@ -50,9 +50,12 @@ class LinkController extends Controller
         $link->category_id = $request->link['category_id'];
         $link->save();
 
+        $links = Link::where('category_id', $request->link['category_id'])->get();
+
         return response()->json([
             'message' => 'Successfully created a new link',
-            'new_link' => $link
+            'new_link' => $link,
+            'links' => $links
         ], 201);
 
     }
@@ -97,8 +100,13 @@ class LinkController extends Controller
      * @param  \App\Link  $link
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Link $link)
+    public function destroy(Request $request, Link $link)
     {
-        //
+        $id = $request->id;
+        Link::destroy($id);
+
+        return response()->json([
+            'message' => ('Successfully deleted Link :' . $id)
+        ], 201);
     }
 }

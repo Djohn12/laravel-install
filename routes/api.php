@@ -29,3 +29,4 @@ Route::post('categories/destroy', 'CategoryController@destroy');
 
 Route::post('links/index', 'LinkController@index');
 Route::post('links/store', 'LinkController@store');
+Route::post('links/destroy', 'LinkController@destroy');
