@@ -16,9 +16,9 @@
 
 		    <div v-if="edit_board_panel">
 		      	<b-input-group class="col-5 mx-auto">
-		        <b-form-input v-model="board_name_edit" type="text" class="form-control" :placeholder="board_name_edit"></b-form-input>
+		        <b-form-input v-model="new_board_name" type="text" class="form-control" :value="board_name_to_edit"></b-form-input>
 		        <b-input-group-append>
-		        	<b-button variant="warning sm" @click="update_board()">Update Board</b-button>
+		        	<b-button variant="warning sm" @click="update_board()">Update Board Name</b-button>
 	   	      		<b-button variant="danger sm" @click="destroy_board()">Delete Board</b-button>
 		        </b-input-group-append>
 		      </b-input-group>
@@ -52,7 +52,9 @@
 				// variable to display edit_board_panel when set to true
 				edit_board_panel: false,
 				// variable filled with active tab name when clicking on "Edit active tab" button
-				board_name_edit: '',
+				board_name_to_edit: '',
+				// variable filled with new board name for update_board function
+				new_board_name: '',
 				// variable to display new board panel when set to true
 				board_panel: false,
       			board_name: '',
@@ -66,14 +68,38 @@
     		},
     		show_edit_board_panel() {
     			if (this.edit_board_panel == false) {
+    				this.board_name_to_edit = this.new_board_name;
     				let active_tab = document.querySelectorAll('a.active');
     				let active_tab_name = active_tab[0].innerHTML;
-    				this.board_name_edit = active_tab_name;
+    				this.board_name_to_edit = active_tab_name;
     			}
     			return this.edit_board_panel = !this.edit_board_panel;
     		},
+    		update_board(){
+    			let old_name = this.board_name_to_edit;
+    			let new_name = this.new_board_name;
+	   			let id;
+    			// map through boards_list to get id of the selected board
+    			this.boards_list.map( x => {
+    				if(x.name == old_name ){
+    					return id = x.id;
+    				}
+    			});
+    			let data = {
+    				'name' : new_name,
+    				'id' : id
+    			}
+    			console.log(data);
+    			window.axios.post('api/boards/update', {data})
+    			.then(response => console.log(response.data.message))
+    			.then(() => this.boards_list.map( x => {
+    				if (x.id = id) {
+    					return x.name = new_name;
+    				}
+    			}));
+    		},
     		destroy_board() {
-    			let name = this.board_name_edit;
+    			let name = this.board_name_to_edit;
     			let id;
     			// map through boards_list to get id of the selected board
     			this.boards_list.map( x => {

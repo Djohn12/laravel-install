@@ -20,5 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('boards/store', 'BoardController@store');
 Route::post('boards/destroy', 'BoardController@destroy');
+Route::post('boards/update', 'BoardController@update');
 
 Route::get('boards/index', 'BoardController@index');
