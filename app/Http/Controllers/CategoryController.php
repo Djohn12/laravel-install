@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Link;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,10 +14,18 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::all();
-        return $categories;
+        $board_id = $request->data['board_id'];
+        $categories = Category::where('board_id', 1)->get();
+        // $links = [];
+        // foreach ($categories as $category) {
+        //     array_push($links, )
+        // }
+        return response()->json([
+            'message' => 'Successfully returned the board categories',
+            'categories' => $categories
+        ], 201);
     }
 
     /**
@@ -43,12 +52,13 @@ class CategoryController extends Controller
         $category->board_id = $request->data['board_id'];
         $category->save();
         
-        // $categories = Category::where('board_id',$request->data['board_id']);
+        $categories = Category::where('board_id',$request->data['board_id']);
         // $categories = Category::all();
 
         return response()->json([
             'message' => 'Successfully created a new category$category',
             'new_category' => $category,
+            'categories' => $categories
         ], 201);
         //
     }

@@ -50,7 +50,7 @@
       			let name = this.board_name;
       			let data = {
         			'name': name,
-        			'user_id': currentUser 
+        			'user_id': thisUser 
       			}
       			// ajax call to the api route
       			window.axios.post('api/boards/store', {data})

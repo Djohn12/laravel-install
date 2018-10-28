@@ -34,7 +34,7 @@
         name: 'Category',
         props: {
             thisCategory: Object,
-            board: Object,
+            links: Array,
         },
         components: {
             Link
@@ -47,25 +47,26 @@
         },
         methods: {
             get_links(){
-                return this.board.links.filter(link => ( link.category_id === this.thisCategory.id ))
+                return this.links.filter(link => ( link.category_id === this.thisCategory.id ))
             },
             add_link(){
 
-                this.board.links.push({
+                this.links.push({
                     // petit algo pour incrémenter les id à la manière de mysql
                     // ---> Récupère l'id de la dernière entrée du la liste et incrémente de 1
-                    id: this.board.links[this.board.links.length - 1].id + 1,
+                    id: this.links[this.links.length - 1].id + 1,
                     category_id: this.thisCategory.id,
-                    name:datas,
+                    name:this.link_url,
                     href:this.link_url,
                     icon:'',
                 })
                 // Nous effaçons cette variable pour remettre l'input à vide et repartir du bon pied pour une nouvelle entrée
                 this.link_url = ''
+                this.add_panel = false
             
             },
             del_link(link_to_del){
-                this.board.links = this.board.links.filter(link => link.id !== link_to_del.id)
+                this.links = this.links.filter(link => link.id !== link_to_del.id)
             }
         }
     }

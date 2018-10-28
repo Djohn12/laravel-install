@@ -83,7 +83,7 @@
 
     @if (Auth::user())
     <script>
-        const currentUser = "{{ Auth::user()->id }}";
+        const thisUser = "{{ Auth::user()->id }}";
     </script>
     @endif
 </body>

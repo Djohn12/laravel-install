@@ -14,7 +14,7 @@
             </div>
 
         <div class="row px-3">
-            <Category v-for="category in board.categories" :key="category.id" :thisCategory="category" :board="board"/>
+            <Category v-for="category in board.categories" :key="category.id" :thisCategory="category" :links="boards[0].links"/>
         </div>
 
     </div>   
@@ -38,12 +38,26 @@ import Category from './Category.vue'
                 category_panel: false,
                 category_name: '',
                 board_id: 1,
-                board: boards[1],
+                board: {},
             }
+        },
+        created(){
+            window.axios.get('api/categories/get')
+            .then(response => {
+                console.log('response.data')
+                console.log(response.data)
+
+                this.board.categories = response.data.categories;
+                console.log('this.board.categories')
+                console.log(this.board.categories)
+            });
         },
         methods: {
             show_category_panel(){
                 this.category_panel = !this.category_panel
+            },
+            get_categories() {
+
             },
             add_category() {
 
@@ -55,15 +69,14 @@ import Category from './Category.vue'
                 // ajax call to the api route
                 window.axios.post('api/categories/store', {data})
                 .then(response => {
-                    console.log('response')
-                    console.log(response)
                     console.log('response.data')
                     console.log(response.data)
 
-                    this.board.categories.push(response.data.new_category)
+                    this.board.categories = response.data.categories;
                     console.log('this.board.categories')
                     console.log(this.board.categories)
                 });
+                // On remet les inputs à zéro
                 this.category_name = ''
                 this.category_panel = false
             }
