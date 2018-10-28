@@ -79,9 +79,16 @@ class BoardController extends Controller
      * @param  \App\Board  $board
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Board $board)
+    public function update(Request $request)
     {
-        //
+        $name = $request->data['name'];
+        $id = $request->data['id'];
+        $board = Board::find($id);
+        $board->name = $name;
+        $board->save();
+        return response()->json([
+            'message' => 'Successfully updated board n°' . $id . '. New name : ' . $name
+        ], 201);
     }
 
     /**
@@ -90,8 +97,12 @@ class BoardController extends Controller
      * @param  \App\Board  $board
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Board $board)
+    public function destroy(Request $request)
     {
-        //
+        $id = $request->id;
+        Board::destroy($id);
+        return response()->json([
+            'message' => ('Successfully deleted board :' . $id)
+        ], 201);
     }
 }
