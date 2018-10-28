@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import boards from '../json/boards.json'
+// import boards from '../json/boards.json'
 
 import Category from './Category.vue'
 
@@ -37,17 +37,26 @@ import Category from './Category.vue'
             return {
                 category_panel: false,
                 category_name: '',
+                category_ids: [],
                 board_id: 1,
                 board: {
                     categories: [],
-                    links: boards[1].links
+                    links: []
                 },
             }
         },
         created(){
 
             window.axios.get(`api/categories/get`)
-            .then(response => this.board.categories = response.data.categories );
+            .then(response => this.board.categories = response.data.categories )
+            .then( () => this.board.categories.map( x => this.category_ids.push(x.id)))
+            .then( () => {
+                let data = this.category_ids;
+                window.axios.post('api/links/index', {data})
+            })
+            .then(response => console.log(response.data.message));
+                // console.log(response.data.links);
+                // this.board.links = response.data.links
         },
         methods: {
             show_category_panel(){

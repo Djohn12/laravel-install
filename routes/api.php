@@ -27,4 +27,5 @@ Route::get('categories/get', 'CategoryController@index');
 Route::post('categories/store', 'CategoryController@store');
 Route::post('categories/destroy', 'CategoryController@destroy');
 
+Route::post('links/index', 'LinkController@index');
 Route::post('links/store', 'LinkController@store');

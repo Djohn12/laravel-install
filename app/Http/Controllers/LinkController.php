@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Link;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
+
 
 class LinkController extends Controller
 {
@@ -12,9 +15,15 @@ class LinkController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $categories = $request->data;
+        $links = Link::whereIn('category_id', $categories)->get();
+
+        return response()->json([
+            'message' => 'Successfully fetch links for present categories',
+            'links' => $links
+        ], 201);
     }
 
     /**
