@@ -14,12 +14,7 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $categories = Category::where('board_id',$request->data['board_id'])->orderBy('id', 'desc');
 
-        return response()->json([
-            'message' => 'Successfully returned the categories of this board',
-            'categories' => $categories
-        ], 201);
     }
 
     /**
@@ -40,6 +35,18 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        
+        $category = new Category();
+        $category->title = $request->data['title'];
+        $category->board_id = $request->data['user_id'];
+        $category->save();
+        
+        $categories = Category::where('board_id',$request->data['board_id']);
+
+        return response()->json([
+            'message' => 'Successfully created a new category$category',
+            'categories' => $categories
+        ], 201);
         //
     }
 

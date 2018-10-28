@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Board;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BoardController extends Controller
 {
@@ -14,7 +15,8 @@ class BoardController extends Controller
      */
     public function index()
     {
-        //
+        $boards = Board::all();
+        return $boards;
     }
 
     /**
