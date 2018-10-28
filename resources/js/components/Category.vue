@@ -14,7 +14,9 @@
                 <div v-if="add_panel" class="list-group list-group-flush">
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                         <!--<div class="input-group-addon">@</div>-->
-                        <input @keydown.enter="add_link()" v-model="link_url" type="text" class="form-control" placeholder="Enter you link address"/>
+                        <input v-model="link_name" type="text" class="form-control" placeholder="Enter you link name"/>
+                        <input v-model="link_url" type="text" class="form-control" placeholder="Enter you link address"/>
+                        <b-button variant="outline-success sm" @click="add_link()">Add link</b-button>
                     </div>
                 </div>
 
@@ -46,6 +48,7 @@
             return {
                 add_panel: false,
                 link_url: '',
+                link_name: '',
             }
         },
         methods: {
@@ -53,16 +56,22 @@
                 return this.links.filter(link => ( link.category_id === this.thisCategory.id ))
             },
             add_link(){
-
-                this.links.push({
-                    // petit algo pour incrémenter les id à la manière de mysql
-                    // ---> Récupère l'id de la dernière entrée du la liste et incrémente de 1
-                    id: this.links[this.links.length - 1].id + 1,
-                    category_id: this.thisCategory.id,
-                    name:this.link_url,
-                    href:this.link_url,
-                    icon:'',
-                })
+                let link = {
+                    'name' : this.link_name,
+                    'url' : this.link_url,
+                    'category_id' : this.thisCategory.id
+                }
+                window.axios.post('api/links/store', {link})
+                .then( response => console.log(response.data.message));
+                // this.links.push({
+                //     // petit algo pour incrémenter les id à la manière de mysql
+                //     // ---> Récupère l'id de la dernière entrée du la liste et incrémente de 1
+                //     id: this.links[this.links.length - 1].id + 1,
+                //     category_id: this.thisCategory.id,
+                //     name:this.link_url,
+                //     href:this.link_url,
+                //     icon:'',
+                // })
                 // Nous effaçons cette variable pour remettre l'input à vide et repartir du bon pied pour une nouvelle entrée
                 this.link_url = ''
                 this.add_panel = false
