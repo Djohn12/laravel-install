@@ -14,7 +14,7 @@
             </div>
 
         <div class="row px-3">
-            <Category v-for="category in board.categories" :key="category.id" :thisCategory="category" :links="board.links"/>
+            <Category v-for="category in board.categories" :key="category.id" :thisCategory="category" :links="board.links" @del_category="delete_category(category.id)"/>
         </div>
 
     </div>   
@@ -78,7 +78,18 @@ import Category from './Category.vue'
                 // On remet les inputs à zéro
                 this.category_name = ''
                 this.category_panel = false
-            }
+            },
+    		delete_category(id) {
+
+                console.log('category to delete')
+                console.log(id)
+
+       			window.axios.post('api/categories/destroy', {id})
+                .then( response => {
+                    this.board.categories = this.board.categories.filter( x => x.id != id) 
+                })
+                .catch(e=> console.log(e.response));
+    		}
         }
     }
 
