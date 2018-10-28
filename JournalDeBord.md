@@ -121,3 +121,24 @@ On terminera le KanBan et fera le planning poker quand on saura un peu plus comm
 
 * Manque de temps, comme d'hab
 * Multiplicité des manières de faire. Laravel comme vuejs sont très permissifs et on trouve vite plusieurs manières de gfaire quelques chose. C'est alors à nous de choisir la solution la plus adapté ou alors de faire un mix de plusieurs d'entre elles. Ca prend du temps et des ressources.
+
+## Jour 7 :
+
+### Produit :
+
+* Create, Update, Delete des boards
+* Create, Read, Delete des categories
+* Create, Read des liens
+* Creation de routes API et de leurs fonctions respectives dans les controllers
+* Deploiement.
+
+### Prévu :
+
+* CRUD sur les boards
+* CRUD sur les categories et les liens
+* Creation de routes API et de leurs fonctions respectives dans les controllers
+* Déploiement
+
+### Problèmes :
+
+* Manque de  recul. Il nous arrive de  buter plusieurs heures sur un probleme avant de nous concerter pour magiquement aboutir.
