@@ -54,14 +54,9 @@ import Category from './Category.vue'
                 let data = this.category_ids;
                 window.axios.post('api/links/index', {data})
             })
-            .then( response => {
-                console.log("got response");
-                console.log(response.data.message);
-                console.log("data ?");
-            }
+            .then(response => console.log(response.data.message));
                 // console.log(response.data.links);
                 // this.board.links = response.data.links
-            );
         },
         methods: {
             show_category_panel(){

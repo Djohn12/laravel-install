@@ -18,13 +18,12 @@ class LinkController extends Controller
     public function index(Request $request)
     {
         $categories = $request->data;
-        print_r($categories);
-        $links = Link::whereIn('category_id', $categories);
+        $links = Link::whereIn('category_id', $categories)->get();
 
         return response()->json([
             'message' => 'Successfully fetch links for present categories',
             'links' => $links
-        ]);
+        ], 201);
     }
 
     /**
