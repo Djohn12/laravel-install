@@ -71,7 +71,21 @@ import Category from './Category.vue'
                 // On remet les inputs à zéro
                 this.category_name = ''
                 this.category_panel = false
-            }
+            },
+    		destroy_category() {
+    			let name = this.category_name_to_edit;
+    			let id;
+    			// map through categories_list to get id of the selected category
+    			this.categories_list.map( x => {
+    				if(x.name == name ){
+    					return id = x.id;
+    				}
+    			});
+    			// send post request to api route with the category's id
+       			window.axios.post('api/categories/destroy', {id})
+       			.then(response => console.log(response.data.message))
+       			.then( () => this.categories_list = this.categories_list.filter( x => x.id != id) );
+    		}
         }
     }
 
