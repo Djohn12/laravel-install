@@ -14,7 +14,7 @@
             </div>
 
         <div class="row px-3">
-            <Category v-for="category in board.categories" :key="category.id" :thisCategory="category" :links="boards[0].links"/>
+            <Category v-for="category in board.categories" :key="category.id" :thisCategory="category" :links="board.links"/>
         </div>
 
     </div>   
@@ -28,7 +28,7 @@ import Category from './Category.vue'
     export default {
         name: 'Board',
         components: {
-            Category,
+            Category
         },
         props: {
             
@@ -38,10 +38,14 @@ import Category from './Category.vue'
                 category_panel: false,
                 category_name: '',
                 board_id: 1,
-                board: {},
+                board: {
+                    categories: [],
+                    links: boards[1].links
+                },
             }
         },
         created(){
+
             window.axios.get('api/categories/get')
             .then(response => {
                 console.log('response.data')
