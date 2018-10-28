@@ -1,8 +1,11 @@
 # Papaly never die 
 
-## Le KanBan du projet est disponible ici https://kanbanflow.com/board/o9TwV8
 
-## Les résultats du Planning Poker sont visisbles là https://pokrex.com/rooms/papaly-never-dies
+## Le site est disponible à l'adresse http://51.68.44.90:3000/register
+
+## Le KanBan du projet est ici https://kanbanflow.com/board/o9TwV8
+
+## Les résultats du Planning Poker sont là https://pokrex.com/rooms/papaly-never-dies
 
 ___ 
 
