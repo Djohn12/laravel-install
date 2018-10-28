@@ -37,7 +37,8 @@ import Category from './Category.vue'
             return {
                 category_panel: false,
                 category_name: '',
-                board: boards[0]
+                board_id: 1,
+                board: boards[1],
             }
         },
         methods: {
@@ -45,11 +46,12 @@ import Category from './Category.vue'
                 this.category_panel = !this.category_panel
             },
             add_category() {
-                let title = this.category_name;
+
                 let data = {
-                    'title': title,
-                    'board_id': this.board.id
+                    'title': this.category_name,
+                    'board_id': this.board_id
                 }
+                console.log(data)
                 // ajax call to the api route
                 window.axios.post('api/categories/store', {data})
                 .then(response => {
