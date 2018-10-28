@@ -55,9 +55,9 @@ import Category from './Category.vue'
                 .then(response => {
                     console.log('response')
                     console.log(response)
-                    console.log('response.data.new_category')
+                    console.log('response.data')
                     console.log(response.data)
-                    
+
                     this.board.categories.push(response.data.new_category)
                     console.log('this.board.categories')
                     console.log(this.board.categories)

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -12,9 +13,10 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-
+        $categories = Category::all();
+        return $categories;
     }
 
     /**
@@ -42,10 +44,11 @@ class CategoryController extends Controller
         $category->save();
         
         // $categories = Category::where('board_id',$request->data['board_id']);
+        // $categories = Category::all();
 
         return response()->json([
             'message' => 'Successfully created a new category$category',
-            'new_category' => $category
+            'new_category' => $category,
         ], 201);
         //
     }
