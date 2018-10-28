@@ -38,14 +38,14 @@ class CategoryController extends Controller
         
         $category = new Category();
         $category->title = $request->data['title'];
-        $category->board_id = $request->data['user_id'];
+        $category->board_id = $request->data['board_id'];
         $category->save();
         
-        $categories = Category::where('board_id',$request->data['board_id']);
+        // $categories = Category::where('board_id',$request->data['board_id']);
 
         return response()->json([
             'message' => 'Successfully created a new category$category',
-            'categories' => $categories
+            'new_category' => $category
         ], 201);
         //
     }

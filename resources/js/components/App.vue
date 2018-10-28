@@ -4,17 +4,6 @@
   <div id="app">
   <Boardslist/>
     <!--<Navbar title="Simple Navbar"/>-->
-    <div>
-      <b-button variant="outline-primary" @click="show_board_panel">New Board</b-button>
-    </div>
-    <div v-if="board_panel">
-      <b-input-group class="col-5 mx-auto">
-        <b-form-input @keydown.enter="add_board()" v-model="board_name" type="text" class="form-control" placeholder="Enter your new board name"></b-form-input>
-        <b-input-group-append>
-          <b-button variant="outline-primary" @click="add_board()">Add new board</b-button>
-        </b-input-group-append>
-      </b-input-group>
-    </div>
     <Board/>
     
   </div>
@@ -43,26 +32,8 @@ export default {
   },
   data(){
     return {
-      board_panel: false,
-      board_name: '',
       message_text: 'If some variable is false... You will not see this',
       message: false
-    }
-  },
-  methods: {
-    show_board_panel(){
-      return this.board_panel = !this.board_panel
-    },
-    add_board() {
-      let name = this.board_name;
-      let data = {
-        'name': name,
-        'user_id': currentUser 
-      }
-      // ajax call to the api route
-      window.axios.post('api/boards/store', {data});
-      this.board_name = ''
-      this.board_panel = false
     }
   }
 }

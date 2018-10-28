@@ -45,13 +45,23 @@ import Category from './Category.vue'
                 this.category_panel = !this.category_panel
             },
             add_category() {
-                let name = this.category_name;
+                let title = this.category_name;
                 let data = {
-                    'title': name,
+                    'title': title,
                     'board_id': this.board.id
                 }
                 // ajax call to the api route
-                window.axios.post('api/categories/store', {data});
+                window.axios.post('api/categories/store', {data})
+                .then(response => {
+                    console.log('response')
+                    console.log(response)
+                    console.log('response.data.new_category')
+                    console.log(response.data)
+                    
+                    this.board.categories.push(response.data.new_category)
+                    console.log('this.board.categories')
+                    console.log(this.board.categories)
+                });
                 this.category_name = ''
                 this.category_panel = false
             }

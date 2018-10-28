@@ -45,7 +45,8 @@ class BoardController extends Controller
         $board->save();
 
         return response()->json([
-            'message' => 'Successfully created a new board'
+            'message' => 'Successfully created a new board',
+            'new_board' => $board
         ], 201);
     }
 
