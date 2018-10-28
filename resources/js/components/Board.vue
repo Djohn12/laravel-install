@@ -14,7 +14,7 @@
             </div>
 
         <div class="row px-3">
-            <Category v-for="category in board.categories" :key="category.id" :thisCategory="category" :links="board.links"/>
+            <Category v-for="category in board.categories" :key="category.id" :thisCategory="category" :links="board.links" @del_category="delete_category(category.id)"/>
         </div>
 
     </div>   
@@ -72,19 +72,16 @@ import Category from './Category.vue'
                 this.category_name = ''
                 this.category_panel = false
             },
-    		destroy_category() {
-    			let name = this.category_name_to_edit;
-    			let id;
-    			// map through categories_list to get id of the selected category
-    			this.categories_list.map( x => {
-    				if(x.name == name ){
-    					return id = x.id;
-    				}
-    			});
-    			// send post request to api route with the category's id
+    		delete_category(id) {
+
+                console.log('category to delete')
+                console.log(id)
+
        			window.axios.post('api/categories/destroy', {id})
-       			.then(response => console.log(response.data.message))
-       			.then( () => this.categories_list = this.categories_list.filter( x => x.id != id) );
+                .then( response => {
+                    this.board.categories = this.board.categories.filter( x => x.id != id) 
+                })
+                .catch(e=> console.log(e.response));
     		}
         }
     }

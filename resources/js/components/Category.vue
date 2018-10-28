@@ -6,6 +6,9 @@
                     <b-btn size="sm" variant="outline-primary" @click="add_panel = !add_panel">
                         <i class="fas fa-plus"></i>
                     </b-btn>
+                    <b-btn size="sm" variant="outline-danger" @click="del_category(thisCategory)">
+                        <i class="fas fa-trash"></i>
+                    </b-btn>
                 </div>
                 <!-- Composant permettant le rajout de lien dans la présente catégorie -->
                 <div v-if="add_panel" class="list-group list-group-flush">
@@ -67,6 +70,9 @@
             },
             del_link(link_to_del){
                 this.links = this.links.filter(link => link.id !== link_to_del.id)
+            },
+            del_category(category){
+                this.$emit('del_category', category)
             }
         }
     }
