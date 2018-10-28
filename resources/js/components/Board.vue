@@ -53,8 +53,8 @@ import Category from './Category.vue'
             .then( () => {
                 let data = this.category_ids;
                 window.axios.post('api/links/index', {data})
+                .then(response => console.log(response.data));
             })
-            .then(response => console.log(response.data.message));
                 // console.log(response.data.links);
                 // this.board.links = response.data.links
         },
