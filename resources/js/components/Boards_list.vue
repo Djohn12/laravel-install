@@ -1,15 +1,28 @@
 <template>
 	<div>
 		<div>
-	      <b-button variant="outline-primary" @click="show_board_panel">New Board</b-button>
-	    </div>
-	    <div v-if="board_panel">
-	      <b-input-group class="col-5 mx-auto">
-	        <b-form-input v-model="board_name" type="text" class="form-control" placeholder="Enter your new board name"></b-form-input>
-	        <b-input-group-append>
-	          <b-button variant="outline-primary" @click="add_board()">Add new board</b-button>
-	        </b-input-group-append>
-	      </b-input-group>
+	      	<b-button variant="outline-primary" @click="show_new_board_panel()">New Board</b-button>
+	      	<b-button variant="outline-success sm" @click="show_edit_board_panel()">Edit active tab</b-button>
+
+			<div v-if="board_panel">
+		      	<b-input-group class="col-5 mx-auto">
+		        	<b-form-input v-model="board_name" type="text" class="form-control" placeholder="Enter your new board name"></b-form-input>
+		        	<b-input-group-append>
+		        		<b-button variant="outline-primary" @click="add_board()">Add new board</b-button>
+		        	</b-input-group-append>
+		      	</b-input-group>
+		    </div>
+
+
+		    <div v-if="edit_board_panel">
+		      	<b-input-group class="col-5 mx-auto">
+		        <b-form-input v-model="board_name_edit" type="text" class="form-control" :placeholder="board_name_edit"></b-form-input>
+		        <b-input-group-append>
+		        	<b-button variant="warning sm" @click="update_board()">Update Board</b-button>
+	   	      		<b-button variant="danger sm" @click="destroy_board()">Delete Board</b-button>
+		        </b-input-group-append>
+		      </b-input-group>
+		    </div>
 	    </div>
 		<div>
 			<!-- if some boards are retrieved with created(), boards variable will be set to true -->
@@ -36,6 +49,11 @@
 		},
 		data() {
 			return {
+				// variable to display edit_board_panel when set to true
+				edit_board_panel: false,
+				// variable filled with active tab name when clicking on "Edit active tab" button
+				board_name_edit: '',
+				// variable to display new board panel when set to true
 				board_panel: false,
       			board_name: '',
 				boards: false,
@@ -43,8 +61,30 @@
 			}
 		},
 		methods: {
-			show_board_panel(){
-      			return this.board_panel = !this.board_panel
+			show_new_board_panel()	{
+      			return this.board_panel = !this.board_panel;
+    		},
+    		show_edit_board_panel() {
+    			if (this.edit_board_panel == false) {
+    				let active_tab = document.querySelectorAll('a.active');
+    				let active_tab_name = active_tab[0].innerHTML;
+    				this.board_name_edit = active_tab_name;
+    			}
+    			return this.edit_board_panel = !this.edit_board_panel;
+    		},
+    		destroy_board() {
+    			let name = this.board_name_edit;
+    			let id;
+    			// map through boards_list to get id of the selected board
+    			this.boards_list.map( x => {
+    				if(x.name == name ){
+    					return id = x.id;
+    				}
+    			});
+    			// send post request to api route with the board's id
+       			window.axios.post('api/boards/destroy', {id})
+       			.then(response => console.log(response.data.message))
+       			.then( () => this.boards_list = this.boards_list.filter( x => x.id != id) );
     		},
 			add_board() {
       			let name = this.board_name;
