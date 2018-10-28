@@ -46,7 +46,7 @@ import Category from './Category.vue'
         },
         created(){
 
-            window.axios.get(`api/categories/get/${this.board_id}`)
+            window.axios.get(`api/categories/get`)
             .then(response => this.board.categories = response.data.categories );
         },
         methods: {

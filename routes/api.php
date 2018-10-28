@@ -21,10 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('boards/store', 'BoardController@store');
 Route::post('boards/destroy', 'BoardController@destroy');
 Route::post('boards/update', 'BoardController@update');
+Route::get('boards/index', 'BoardController@index');
 
-Route::get('categories/get/{id}', 'CategoryController@index');
+Route::get('categories/get', 'CategoryController@index');
 Route::post('categories/store', 'CategoryController@store');
-
-// Route::resource('/boards', 'BoardsController',[
-// 	'except' => ['index', 'create', 'show', 'edit', 'update', 'destroy']
-// ]);
