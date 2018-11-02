@@ -14,9 +14,9 @@
                 <div v-if="add_panel" class="list-group list-group-flush">
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                         <!--<div class="input-group-addon">@</div>-->
-                        <input v-model="link_name" type="text" class="form-control" placeholder="Enter you link name"/>
-                        <input v-model="link_url" type="text" class="form-control" placeholder="Enter you link address"/>
-                        <b-button variant="outline-success sm" @click="add_link()">Add link</b-button>
+                        <!--<input v-model="link_name" type="text" class="form-control" placeholder="Enter you link name"/>-->
+                        <input v-model="link_url" type="text" class="form-control" placeholder="Enter you link address" @pkeydown.enter="add_link(link_url)"/>
+                        <b-button variant="outline-success sm" @click="add_link(link_url)">Add link</b-button>
                     </div>
                 </div>
 
@@ -55,16 +55,33 @@
             get_links(){
                 return this.links.filter(link => ( link.category_id === this.thisCategory.id ))
             },
-            add_link(){
-                let link = {
-                    'name' : this.link_name,
-                    'url' : this.link_url,
-                    'category_id' : this.thisCategory.id
+            add_link(url){
+                if (Algorithmia) {
+                    let input = [url,"weka"];
+                    Algorithmia.client("sim5/PqeqGjLoEkEtEkK6/NfGaT1")
+                        .algo("web/AnalyzeURL/0.2.17")
+                        .pipe(input)
+                        .then(function(output) {
+                            console.log(output);
+                            console.log(output.title);
+                            let link = {
+                                'name' : output.title,
+                                'url' : this.link_url,
+                                'category_id' : this.thisCategory.id
+                            }
+                            window.axios.post('api/links/store', {link})
+                            .then( response => {
+                                this.links = response.data.links
+                            })
+                            .catch(e => {
+                                console.log(e)
+                            });
+                        });
+                } else {
+                    this.links.push({'name':this.link_url, 'url': this.link_url, 'category_id': this.thisCategory.id})
                 }
-                window.axios.post('api/links/store', {link})
-                .then( response => {
-                    this.links = response.data.links
-                });
+
+
                 // this.links.push({
                 //     // petit algo pour incrémenter les id à la manière de mysql
                 //     // ---> Récupère l'id de la dernière entrée du la liste et incrémente de 1

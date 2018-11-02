@@ -19,7 +19,7 @@ class CreateBoardsTable extends Migration
             $table->boolean('public');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->integer('category_id')->unsigned();
+            // $table->integer('category_id')->unsigned();
             $table->timestamps();
         });
     }

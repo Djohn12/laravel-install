@@ -37,8 +37,8 @@ import Category from './Category.vue'
             return {
                 category_panel: false,
                 category_name: '',
-                category_ids: [],
                 board_id: 1,
+                category_ids: [],
                 board: {
                     categories: [],
                     links: []
@@ -46,22 +46,27 @@ import Category from './Category.vue'
             }
         },
         created(){
-
-            window.axios.get(`api/categories/get`)
-            .then(response => this.board.categories = response.data.categories )
-            .then( () => this.board.categories.map( x => this.category_ids.push(x.id)))
-            .then( () => {
-                let data = this.category_ids;
-                window.axios.post('api/links/index', {data})
-                .then(response => this.board.links = response.data.links)
-            });
+            this.get_board()
         },
         methods: {
             show_category_panel(){
                 this.category_panel = !this.category_panel
             },
-            get_categories() {
-
+            change_board(id){
+                this.board_id = id
+                this.get_board()
+            },
+            get_board(){
+                let id = this.board_id
+                window.axios.get(`api/categories/get`, {id})
+                .then(response => this.board.categories = response.data.categories, e => console.log(e) )
+                .then( () => this.board.categories.map( x => this.category_ids.push(x.id)), e => console.log(e))
+                .then( () => {
+                
+                    let ids = this.category_ids
+                    window.axios.post('api/links/index', {ids})
+                    .then(response => this.board.links = response.data.links)
+                })
             },
             add_category() {
 

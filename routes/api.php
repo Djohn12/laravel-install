@@ -18,12 +18,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
+Route::get('/users', 'HomeController@api');
+
 Route::post('boards/store', 'BoardController@store');
 Route::post('boards/destroy', 'BoardController@destroy');
 Route::post('boards/update', 'BoardController@update');
 Route::get('boards/index', 'BoardController@index');
 
-Route::get('categories/get', 'CategoryController@index');
+Route::post('categories/get', 'CategoryController@index');
 Route::post('categories/store', 'CategoryController@store');
 Route::post('categories/destroy', 'CategoryController@destroy');
 

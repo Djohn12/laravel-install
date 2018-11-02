@@ -32,8 +32,7 @@ export default {
   },
   data(){
     return {
-      message_text: 'If some variable is false... You will not see this',
-      message: false
+      
     }
   }
 }

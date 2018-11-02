@@ -15,7 +15,21 @@ class BoardController extends Controller
      */
     public function index()
     {
-        $boards = Board::all();
+        $boards = Board::where('user_id', Auth::user()->id)->get();
+
+        // if (sizeof($boards) < 1) {
+
+        //     $board = new Board();
+        //     $board->name = 'My first board !';
+        //     $board->public = 0;
+        //     $board->user_id = Auth::user()->id;
+        //     $board->category_id = 1; // à enlever
+        //     $board->save();
+
+        //     $boards = Board::where('user_id', Auth::user()->id)->get();
+
+        // }
+
         return $boards;
     }
 
@@ -40,8 +54,7 @@ class BoardController extends Controller
         $board = new Board();
         $board->name = $request->data['name'];
         $board->public = 0;
-        $board->user_id = $request->data['user_id'];
-        $board->category_id = 1; // à enlever
+        $board->user_id = Auth::user()->id;
         $board->save();
 
         return response()->json([

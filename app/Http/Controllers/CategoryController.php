@@ -16,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $board_id = 1;
+        $board_id = $request->data;
         $categories = Category::where('board_id', $board_id)->get();
         // $links = [];
         // foreach ($categories as $category) {
